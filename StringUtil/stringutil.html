@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>StringUtil</title>
+    </head>
+    <body>
+<script src="stringutil.js"></script>
+
+<script>
+
+function test(msg, cond) {
+	if(cond) {
+		console.info(msg, 'Passed');
+	}
+	else {
+		console.error(msg, 'Failed');
+	}
+}
+
+test('Format', StringUtil.format('My name is {{name}} and my favorite color is {{color}}', { name: 'Bob', color: 'Red' }) === 'My name is Bob and my favorite color is Red');
+
+test('Format', StringUtil.format('The names of the three musketeers where {{0}}, {{1}}, and {{2}}.', [ 'Athos', 'Porthos', 'Aramis' ]) === 'The names of the three musketeers where Athos, Porthos, and Aramis.');
+
+test('If', StringUtil.if(true, 'a', 'b') === 'a');
+
+test('If', StringUtil.if(false, 'a', 'b') === 'b');
+
+test('If', StringUtil.if(true, 'c') === 'c');
+
+test('If', StringUtil.if(false, 'c') === '');
+
+test('PadLeft', StringUtil.padLeft('12', 4, '0') === '0012');
+
+test('PadLeft', StringUtil.padLeft('12', 2, '0') === '12');
+
+test('PadLeft', StringUtil.padLeft('12', 1, '0') === '12');
+
+test('PadRight', StringUtil.padRight('12', 5, '0') === '12000');
+
+test('PadRight', StringUtil.padRight('12', 2, '0') === '12');
+
+test('PadRight', StringUtil.padRight('12', 1, '0') === '12');
+
+test('Repeat', StringUtil.repeat('monkey', 3) === 'monkeymonkeymonkey');
+
+</script>
+    </body>
+</html>

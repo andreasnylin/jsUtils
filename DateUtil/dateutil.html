@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>DateUtil</title>
+    </head>
+    <body>
+<script src="dateutil.js"></script>
+
+<script>
+
+function test(msg, cond) {
+	if(cond) {
+		console.info(msg);
+	}
+	else {
+		console.error(msg);
+	}
+}
+
+var now = new Date();
+
+test('january has 31 days', DateUtil.daysInMonth(2015, 0) === 31);
+
+test('february has 28 days', DateUtil.daysInMonth(2014, 1) === 28);
+
+test('novemver has 30 days', DateUtil.daysInMonth(2014, 10) === 30);
+
+
+test('Time diff is 365 days', DateUtil.getTimeDiff(new Date(2014, 0, 1), new Date(2015, 0, 1)).days === 365);
+
+test('Time diff is 37 minutes', DateUtil.getTimeDiff(new Date(2015, 2, 2, 13, 0, 0), new Date(2015, 2, 2, 13, 37, 0)).minutes === 37);
+
+test('To UTC Date', DateUtil.toUTCDate(new Date(2015, 2, 2, 13, 0, 0)));
+
+var a = new Date(2015, 5, 12, 7, 54);
+var b = new Date(2016, 2, 2, 13, 37, 0);
+
+var diff = DateUtil.getTimeDiff(a, b, true);
+
+test('Time diff is 264 days', diff.days === 264);
+test('Time diff is 5 hours', diff.hours === 5);
+test('Time diff is 43 minutes', diff.minutes === 43);
+test('Time diff is 0 seconds', diff.seconds === 0);
+
+var dates = [ new Date(2014, 3, 1),
+	new Date(2014, 3, 30),
+	new Date(2012, 5, 14, 0, 0, 10),
+	new Date(2015, 1, 15, 13, 56),
+	new Date(2016, 0, 25),
+	new Date(2012, 5, 25, 0, 20),
+	new Date(2012, 5, 25, 0, 10),
+	new Date(2012, 5, 25, 0, 30) 
+];
+
+test('First date year is 2014', dates[0].getFullYear() === 2014);
+test('First date month is 3', dates[0].getMonth() === 3);
+test('First date seconds is 0', dates[0].getSeconds() === 0);
+
+DateUtil.sortDates(dates);
+
+test('First date year is 2012', dates[0].getFullYear() === 2012);
+test('First date month is 5', dates[0].getMonth() === 5);
+test('First date seconds is 10', dates[0].getSeconds() === 10);
+
+DateUtil.sortDates(dates, false);
+
+test('First date year is 2016', dates[0].getFullYear() === 2016);
+test('First date month is 0', dates[0].getMonth() === 0);
+test('First date seconds is 0', dates[0].getSeconds() === 0);
+
+</script>
+    </body>
+</html>

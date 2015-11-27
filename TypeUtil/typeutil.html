@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>DateUtil</title>
+    </head>
+    <body>
+<script src="stringutil.js"></script>
+
+<script>
+
+function test(msg, cond) {
+	if(cond) {
+		console.info(msg, 'Passed');
+	}
+	else {
+		console.error(msg, 'Failed');
+	}
+}
+
+var func = function() {
+
+};
+
+function func2() {
+
+}
+
+var func3 = new function() {
+
+};
+
+var ClassFunc = function() {
+
+};
+
+var classFunc = new ClassFunc();
+
+var obj = {};
+
+var obj2 = new Object();
+
+var arr = [];
+
+var arr2 = new Array();
+
+var date = new Date();
+
+var num = 1;
+
+var num0 = 0;
+
+var num2 = 2.2;
+
+var str = "hello";
+
+console.log('func', typeUtil.getType(func));
+console.log('func2', typeUtil.getType(func2));
+console.log('func3', typeUtil.getType(func3));
+console.log('classFunc', typeUtil.getType(classFunc));
+console.log('obj', typeUtil.getType(obj));
+console.log('obj2', typeUtil.getType(obj2));
+console.log('arr', typeUtil.getType(arr));
+console.log('arr2', typeUtil.getType(arr2));
+console.log('date', typeUtil.getType(date));
+console.log('num', typeUtil.getType(num));
+console.log('num0', typeUtil.getType(num));
+console.log('num2', typeUtil.getType(num2));
+console.log('str', typeUtil.getType(str));
+console.log('null', typeUtil.getType(null));
+console.log('undefined', typeUtil.getType(undefined));
+console.log('\'\'', typeUtil.getType(''));
+
+console.log('func is function', typeUtil.isFunction(func));
+console.log('func2 is function', typeUtil.isFunction(func2));
+console.log('func3 is object', typeUtil.isObject(func3));
+console.log('classFunc is object', typeUtil.isObject(classFunc));
+console.log('obj is object', typeUtil.isObject(obj));
+console.log('obj2 is object', typeUtil.isObject(obj2));
+console.log('arr is array', typeUtil.isArray(arr));
+console.log('arr2 is array', typeUtil.isArray(arr2));
+console.log('date is date', typeUtil.isDate(date));
+console.log('num is number', typeUtil.isNumber(num));
+console.log('num0 is number', typeUtil.isNumber(num));
+console.log('num2 is number', typeUtil.isNumber(num2));
+console.log('str is string', typeUtil.isString(str));
+console.log('\'\' is string', typeUtil.isString(''));
+console.log('null is null', typeUtil.isNull(null));
+console.log('undefined is undefined', typeUtil.isUndefined(undefined));
+
+</script>
+    </body>
+</html>
