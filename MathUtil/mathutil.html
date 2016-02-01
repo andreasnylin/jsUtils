@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>DateUtil</title>
+    </head>
+    <body>
+<script src="mathutil.js"></script>
+
+<script>
+
+function test(msg, cond) {
+	if(cond) {
+		console.info(msg);
+	}
+	else {
+		console.error(msg);
+	}
+}
+
+var now = new Date();
+
+for(var i = 0; i < 10; i++) {
+	console.log(MathUtil.random(10,20));
+}
+
+for(var i = 0; i < 10; i++) {
+	console.log(MathUtil.randomInt(10,20));
+}
+
+for(var i = 0; i < 10; i++) {
+	console.log(MathUtil.randomValue(['a', 'b', 'c', 'd', 'e']));
+}
+
+for(var i = 0; i < 10; i++) {
+	console.log(MathUtil.randomValue('a', 'b', 'c', 'd', 'e'));
+}
+
+</script>
+    </body>
+</html>
