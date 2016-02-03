@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>DateUtil</title>
+        <title>MathUtil</title>
     </head>
     <body>
 <script src="mathutil.js"></script>
@@ -19,7 +19,19 @@ function test(msg, cond) {
 	}
 }
 
-var now = new Date();
+test('norm(10, 0, 20) === 0.5', MathUtil.norm(10, 0, 20) === 0.5);
+
+test('lerp(0.5, 0, 20) === 10', MathUtil.lerp(0.5, 0, 20) === 10);
+
+test('MathUtil.map(10, 0, 20, 0, 100) === 50', MathUtil.map(10, 0, 20, 0, 100) === 50);
+
+test('MathUtil.clamp(50, 0, 25) === 25', MathUtil.clamp(50, 0, 25) === 25);
+
+test('MathUtil.clamp(-10, 0, 25) === 0', MathUtil.clamp(-10, 0, 25) === 0);
+
+test('MathUtil.inRange(5, -1, 8) === true', MathUtil.inRange(5, -1, 8));
+
+test('MathUtil.inRange(10, -1, 8) === false', MathUtil.inRange(10, -1, 8) === false);
 
 for(var i = 0; i < 10; i++) {
 	console.log(MathUtil.random(10,20));
