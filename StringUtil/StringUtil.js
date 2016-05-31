@@ -1,6 +1,39 @@
 var StringUtil = {
 
+	appendIf: function(condition, truthyString, falsyString) {
+
+		falsyString = falsyString || this.empty;
+
+		return condition ? truthyString : falsyString;
+	},
+
+	chunk: function(text, length) {
+
+		if(length <= 0 || text.length <= length)  {
+			return text;
+		}
+
+		var rx = new RegExp(".{1," + length + "}", "gi");
+		
+		return text.match(rx);
+	},
+
 	empty: '',
+
+	endsWith: function(text, searchString, position) {
+		if (!String.prototype.endsWith) {
+		 var subjectString = text.toString();
+		      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+		        position = subjectString.length;
+		      }
+		      position -= searchString.length;
+		      var lastIndex = subjectString.indexOf(searchString, position);
+		      return lastIndex !== -1 && lastIndex === position;
+		} else {
+			return text.endsWith(searchString, position);
+		      
+		}
+	},
 
 	format: function(text, values) {
 		var output = text,
@@ -25,13 +58,6 @@ var StringUtil = {
 		}
 
 	    return output;
-	},
-
-	if: function(condition, truthyString, falsyString) {
-
-		falsyString = falsyString || this.empty;
-
-		return condition ? truthyString : falsyString;
 	},
 
 	isNull: function(text) {
@@ -119,16 +145,35 @@ var StringUtil = {
 
 		var params = ignoreCase ? 'gi' : 'g';
 
-		console.log('find', find)
-		console.log('replacement', replacement)
-
 		return text.replace(new RegExp(find, params), replacement);
+	},
+
+	replaceBetween: function(text, start, end, replacement) {
+	    return text.substring(0, start) + replacement + text.substring(end);
 	},
 
 	split: function(text, delimiters, keepDelimiters) {
 		var expr = keepDelimiters ? '([' + delimiters + '])' : '[' + delimiters + ']';
 
 		return text.split(new RegExp(expr, 'gi'));
+	},
+
+	splitTrim: function(text, delimiter) {
+		var arr = this.split(text, delimiter);
+
+		return this.trimAll(arr);
+	},
+
+	startsWith: function(text, textToFind, position) {
+
+		position = position || 0;
+
+		if (String.prototype.startsWith) {
+			return text.startsWith(textToFind, position);
+		}
+		else {
+	      return text.substr(position, textToFind.length) === searchString;
+	  	}
 	},
 
 	trim: function(text) {
@@ -139,6 +184,23 @@ var StringUtil = {
 		    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
 		    return this.replace(rtrim, '');
 		}
+	},
+
+	trimAll: function() {
+		var arr;
+
+		if(arguments.length === 1 && arguments[0] instanceof Array) {
+			arr = arguments[0];
+		}
+		else {
+			arr = Array.prototype.slice.call(arguments);
+		}
+
+		for (var i = arr.length - 1; i >= 0; i--) {
+			arr[i] = this.trim(String(arr[i]));
+		}
+
+		return arr;
 	},
 
 	truncat: function(text, maxLength, suffix) {
