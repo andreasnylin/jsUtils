@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ArrayUtil</title>
+    </head>
+    <body>
+<script src="arrayutil.js"></script>
+
+<script>
+
+function test(msg, cond) {
+	if(cond) {
+		console.info(msg);
+	}
+	else {
+		console.error(msg);
+	}
+}
+
+console.log(ArrayUtil.randomValue([1,2,3]));
+console.log(ArrayUtil.randomValue(1,2,3));
+
+
+var arr1 = [1,2,3,4,5,6,7,8,9];
+
+ArrayUtil.fill(arr1, 0, 1, 8)
+
+console.log(arr1)
+
+ArrayUtil.fill(arr1, 'x')
+
+console.log(arr1)
+
+test('ArrayUtil.fill(arr1, 0, 1, 8)', false)
+
+</script>
+    </body>
+</html>
