@@ -41,6 +41,17 @@ var MathUtil = {
 		       utils.inRange(y, rect.y, rect.y + rect.height);
 	},
 
+	loop: function(val, min, max) {
+	    var p = max - min + 1;
+	    var mod = (val - min) % p;
+
+	    if(mod < 0) {
+	        mod += p;
+	    }
+
+	    return min + mod;
+	},
+
 	inRange: function(value, min, max) {
 		return value >= Math.min(min, max) && value <= Math.max(min, max);
 	},
@@ -57,6 +68,17 @@ var MathUtil = {
 	// Get scale based on width or height
 	getScale: function(width, height, maxWidth, maxHeight) {
 	    return Math.min(maxWidth / width, maxHeight / height);
+	},
+
+	range: function(min, max, step) {
+		step = step || 1;
+		var values = [];
+		while(min <= max) {
+			values.push(min);
+			min += step;
+		}
+
+		return values;
 	},
 
 	random: function(min, max) {
@@ -83,18 +105,12 @@ var MathUtil = {
 	  return range;
 	},
 
-	randomValue: function() {
+	randomMultiplier: function(min, max, multiplier){
+	    return Math.floor(min + Math.random() * (max - min) / multiplier + 1) * multiplier;
+	},
 
-		var length = arguments.length;
-
-		if(length === 1 && arguments[0] instanceof Array) {
-			var array = arguments[0];
-			return array[this.randomInt(0, array.length - 1)];
-		}
-		else {
-			return arguments[this.randomInt(0, length - 1)];
-		}
-
+	roundToNearest: function(val, multiplier) {
+		return Math.round(val / multiplier) * multiplier;
 	}
 
 };

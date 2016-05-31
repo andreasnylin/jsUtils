@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>MathUtil</title>
+        <title>MathUtilg</title>
     </head>
     <body>
 <script src="mathutil.js"></script>
@@ -37,17 +37,54 @@ for(var i = 0; i < 10; i++) {
 	console.log(MathUtil.random(10,20));
 }
 
-for(var i = 0; i < 10; i++) {
-	console.log(MathUtil.randomInt(10,20));
+var randomIntArr = [];
+
+for(var i = 0; i < 5000; i++) {
+	randomIntArr.push(MathUtil.randomInt(0,100));
 }
+
+console.table(randomIntArr.reduce(function (acc, curr) {
+  if (typeof acc[curr] == 'undefined') {
+    acc[curr] = 1;
+  } else {
+    acc[curr] += 1;
+  }
+
+  return acc;
+}, {}));
 
 for(var i = 0; i < 10; i++) {
 	console.log(MathUtil.randomValue(['a', 'b', 'c', 'd', 'e']));
 }
 
-for(var i = 0; i < 10; i++) {
-	console.log(MathUtil.randomValue('a', 'b', 'c', 'd', 'e'));
+test('MathUtil.roundToNearest(3.14, 5) === 5', MathUtil.roundToNearest(3.14, 5) === 5);
+
+test('MathUtil.roundToNearest(55, 100) === 100', MathUtil.roundToNearest(55, 100) === 100);
+
+test('MathUtil.roundToNearest(1203.14435, 1000) === 1000', MathUtil.roundToNearest(1203.14435, 1000) === 1000);
+
+var arr = [];
+
+for(var i = 0; i < 5000; i++) {
+	arr.push(MathUtil.randomMultiplier(0,100,5));
+	
 }
+
+console.table(arr.reduce(function (acc, curr) {
+  if (typeof acc[curr] == 'undefined') {
+    acc[curr] = 1;
+  } else {
+    acc[curr] += 1;
+  }
+
+  return acc;
+}, {}));
+
+test('MathUtil.loop(11, 0, 10) === 0', MathUtil.loop(11, 0, 10) === 0);
+test('MathUtil.loop(12, 0, 10) === 1', MathUtil.loop(12, 0, 10) === 1);
+test('MathUtil.loop(-1, 0, 10) === 10', MathUtil.loop(-1, 0, 10) === 10);
+
+console.log(MathUtil.range(0,10,3))
 
 </script>
     </body>
