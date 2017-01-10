@@ -25,13 +25,13 @@ test('Format', StringUtil.format('The names of the three musketeers where {{0}},
 
 test('Ends with kek', StringUtil.endsWith('omg kek', 'kek'));
 
-test('If', StringUtil.if(true, 'a', 'b') === 'a');
+test('appendIf', StringUtil.appendIf(true, 'a', 'b') === 'a');
 
-test('If', StringUtil.if(false, 'a', 'b') === 'b');
+test('appendIf', StringUtil.appendIf(false, 'a', 'b') === 'b');
 
-test('If', StringUtil.if(true, 'c') === 'c');
+test('appendIf', StringUtil.appendIf(true, 'c') === 'c');
 
-test('If', StringUtil.if(false, 'c') === '');
+test('appendIf', StringUtil.appendIf(false, 'c') === '');
 
 test('PadLeft', StringUtil.padLeft('12', 4, '0') === '0012');
 
@@ -62,6 +62,11 @@ test('trimAll ', StringUtil.trimAll(' Abc ', ' 123 ', 456, null)[1] === '123');
 test('trimAll ', StringUtil.trimAll(' Abc ', ' 123 ', 456, null)[2] === '456');
 test('trimAll ', StringUtil.trimAll(' Abc ', ' 123 ', 456, null)[3] === 'null');
 test('trimAll ', StringUtil.trimAll([' Abc ', ' 123 ', 456, null])[0] === 'Abc');
+
+console.log(StringUtil.truncateMid('abcdefghijklmnop', 5))
+
+test('truncateMid', StringUtil.truncateMid('abcdefghijklmnop', 5, '...') === 'a...p');
+test('truncateMid', StringUtil.truncateMid('abcdefghijklmnop', 5) === 'abcop');
 
 test('chunk 123456789 ', StringUtil.chunk('123456789', 3).length === 3);
 test('chunk 1 is 456 ', StringUtil.chunk('123456789', 3)[1] === '456');

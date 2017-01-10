@@ -1,5 +1,43 @@
 var StringUtil = {
 
+	anyNullOrUndefined: function() {
+		var arr;
+
+		if(arguments.length === 1 && arguments[0] instanceof Array) {
+			arr = arguments[0];
+		}
+		else {
+			arr = Array.prototype.slice.call(arguments);
+		}
+
+		for(var i = 0, l = arr.length; i < l; i++) {
+			if(this.isNull(text) && this.isNullOrUndefined(text)) {
+				return true;
+			}
+		}
+
+		return false;
+	},
+
+	anyEmptyOrWhiteSpace: function() {
+		var arr;
+
+		if(arguments.length === 1 && arguments[0] instanceof Array) {
+			arr = arguments[0];
+		}
+		else {
+			arr = Array.prototype.slice.call(arguments);
+		}
+
+		for(var i = 0, l = arr.length; i < l; i++) {
+			if(this.trim(text).length === 0) {
+				return true;
+			}
+		}
+
+		return false;
+	},
+
 	appendIf: function(condition, truthyString, falsyString) {
 
 		falsyString = falsyString || this.empty;
@@ -16,6 +54,10 @@ var StringUtil = {
 		var rx = new RegExp(".{1," + length + "}", "gi");
 		
 		return text.match(rx);
+	},
+
+	count: function(text, find) {
+		return text.split(find).length - 1;
 	},
 
 	empty: '',
@@ -39,10 +81,15 @@ var StringUtil = {
 		var output = text,
 	        l = '\\{\\{',
 	        r = '\\}\\}',
-	        find,
-	        regexp;
+	        find;
 
-       	if(values instanceof Array) {
+	    if(arguments.length > 2) {
+	    	for (var i = 0, l = arguments.length - 1; i < l; i++) {
+	    		find = l + i + r;
+	    		output = this.replaceAll(output, find, arguments[i+1]);
+	    	};
+	    }
+       	else if(values instanceof Array) {
 			for(var i = 0, j = values.length; i < j; i++) {	        
 	            find = l + i + r;
 	            output = this.replaceAll(output, find, values[i]);
@@ -152,6 +199,11 @@ var StringUtil = {
 	    return text.substring(0, start) + replacement + text.substring(end);
 	},
 
+	// This does not work with unicode characters
+	reverse: function(text) {
+	    return text.split('').reverse().join('');
+	},
+
 	split: function(text, delimiters, keepDelimiters) {
 		var expr = keepDelimiters ? '([' + delimiters + '])' : '[' + delimiters + ']';
 
@@ -203,7 +255,7 @@ var StringUtil = {
 		return arr;
 	},
 
-	truncat: function(text, maxLength, suffix) {
+	truncate: function(text, maxLength, suffix) {
 
 		if(this.isEmptyOrWhiteSpace(text)) {
 			return text;
@@ -220,6 +272,43 @@ var StringUtil = {
             return text.substring(0, length);
         }
 
+	},
+
+	truncateLeft: function(text, maxLength, prefix) {
+
+		if(this.isEmptyOrWhiteSpace(text)) {
+			return text;
+		}
+
+		var length = prefix != null ? maxLength - prefix.length : maxLength;
+
+		if(prefix != null)
+        {
+            return prefix + text.substring(text.length - length);
+        }
+        else
+        {
+            return text.substring(text.length - length);
+        }
+
+	},
+
+	truncateMid: function(text, maxLength, replacement) {
+		if(this.isNullOrUndefined(text) || text.length <= maxLength) {
+			return text;
+		}
+			
+		if(replacement) {
+			maxLength -= replacement.length;
+		}
+		else {
+			replacement = '';
+		}
+			
+		var mid = Math.floor(maxLength / 2),
+			first = mid % 2 == 0 ? mid + 1 : mid;
+
+		return text.substring(0, first) + replacement + text.substring(text.length - mid);
 	}
 	
 };
