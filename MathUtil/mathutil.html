@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>MathUtilg</title>
+        <title>MathUtil</title>
     </head>
     <body>
 <script src="mathutil.js"></script>
@@ -53,9 +53,23 @@ console.table(randomIntArr.reduce(function (acc, curr) {
   return acc;
 }, {}));
 
-for(var i = 0; i < 10; i++) {
-	console.log(MathUtil.randomValue(['a', 'b', 'c', 'd', 'e']));
-}
+// for(var i = 0; i < 10; i++) {
+// 	console.log(MathUtil.randomValue(['a', 'b', 'c', 'd', 'e']));
+// }
+
+console.log(MathUtil.mid(1, 2, 3))
+
+test('MathUtil.mid(1, 2, 3) === 2', MathUtil.mid(1, 2, 3) === 2);
+
+test('MathUtil.mean(1, 2, 3) === 2', MathUtil.mean(1, 2, 3) === 2);
+
+test('MathUtil.mean(1, 2, 3, 4) === 2', MathUtil.mean(1, 2, 3, 4) === 2);
+
+test('MathUtil.roundDecimals(10.05, 1) === 10.1', MathUtil.roundDecimals(10.05, 1) === 10.1)
+
+test('MathUtil.roundDecimals(13.237682376823, 2) === 13.24', MathUtil.roundDecimals(13.237682376823, 2) === 13.24)
+
+test('MathUtil.roundDecimals(444.331182376823, 3) === 444.331', MathUtil.roundDecimals(444.331182376823, 3) === 444.331)
 
 test('MathUtil.roundToNearest(3.14, 5) === 5', MathUtil.roundToNearest(3.14, 5) === 5);
 
@@ -63,12 +77,16 @@ test('MathUtil.roundToNearest(55, 100) === 100', MathUtil.roundToNearest(55, 100
 
 test('MathUtil.roundToNearest(1203.14435, 1000) === 1000', MathUtil.roundToNearest(1203.14435, 1000) === 1000);
 
+
+
 var arr = [];
 
 for(var i = 0; i < 5000; i++) {
 	arr.push(MathUtil.randomMultiplier(0,100,5));
 	
 }
+
+console.log('MathUtil.randomMultiplier');
 
 console.table(arr.reduce(function (acc, curr) {
   if (typeof acc[curr] == 'undefined') {
@@ -85,6 +103,8 @@ test('MathUtil.loop(12, 0, 10) === 1', MathUtil.loop(12, 0, 10) === 1);
 test('MathUtil.loop(-1, 0, 10) === 10', MathUtil.loop(-1, 0, 10) === 10);
 
 console.log(MathUtil.range(0,10,3))
+
+test('MathUtil.sum(1, 2, 3) === 6', MathUtil.sum(1, 2, 3) === 6);
 
 </script>
     </body>

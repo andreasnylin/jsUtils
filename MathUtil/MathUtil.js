@@ -56,6 +56,20 @@ var MathUtil = {
 		return value >= Math.min(min, max) && value <= Math.max(min, max);
 	},
 
+	mid: function() {
+		return this.sum.apply(this, arguments) / arguments.length;
+	},
+
+	mean: function() {
+		var mid = Math.floor((arguments.length - 1) / 2);
+		console.log(mid);
+		return arguments[mid];
+	},
+
+	neg: function(value) {
+		return 0 - value;
+	},
+
 	degreesToRadians: function(degrees) {
     	return (degrees * Math.PI) / 180;
 	},
@@ -106,11 +120,26 @@ var MathUtil = {
 	},
 
 	randomMultiplier: function(min, max, multiplier){
-	    return Math.floor(min + Math.random() * (max - min) / multiplier + 1) * multiplier;
+	    return Math.floor((min + Math.random() * (max - min + 1)) / multiplier) * multiplier;
+	},
+
+	roundDecimals: function(v, d) {
+	    var x = Math.pow(10, d); 
+	    return Math.round(v * x)/x;
 	},
 
 	roundToNearest: function(val, multiplier) {
 		return Math.round(val / multiplier) * multiplier;
+	},
+
+	sum: function() {
+		var s = 0;
+
+		for (var i = arguments.length - 1; i >= 0; i--) {
+			s += arguments[i];
+		}
+
+		return s;
 	}
 
 };
