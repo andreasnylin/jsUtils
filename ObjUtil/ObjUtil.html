@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ObjUtil</title>
+    </head>
+    <body>
+<script src="objutil.js"></script>
+
+<script>
+
+function test(msg, cond) {
+  if(cond) {
+    console.info(msg);
+  }
+  else {
+    console.error(msg);
+  }
+}
+
+var obj = {
+  a: 'abc',
+  b: 123,
+  foo: {
+    d: true,
+    e: false,
+    bar: {
+      g: function() {},
+      h: [],
+      baz: 'wow'
+    }
+  }
+};
+
+test('ObjUtil.findProp(obj, \'foo.bar.baz\') === \'wow\'', ObjUtil.findProp(obj, 'foo.bar.baz') === 'wow');
+
+</script>
+    </body>
+</html>

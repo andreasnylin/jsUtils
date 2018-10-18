@@ -45,6 +45,40 @@ var StringUtil = {
 		return condition ? truthyString : falsyString;
 	},
 
+	camelCase: function(text, splitChars) {
+		splitChars = splitChars || ' ';
+		
+		var arr = text.split(splitChars);
+
+		for (var i = 0; i < arr.length; i++) {
+			arr[i] = i === 0 ? arr[i].toLowerCase() : this.capitalizeFirstLetter(arr[i]);
+		}
+
+		return arr.join('');
+	},
+
+	pascalCase: function(text, splitChars) {
+		splitChars = splitChars || ' ';
+		
+		var arr = text.split(splitChars);
+
+		for (var i = 0; i < arr.length; i++) {
+			arr[i] = this.capitalizeFirstLetter(arr[i]);
+		}
+
+		return arr.join('');
+	},
+
+	capitalizeFirstLetter: function(text) {
+		return text.substring(0,1).toUpperCase() + text.substring(1);
+	},
+
+	capitalizeFirstLetters: function(text) {
+		return text.split(' ').map(function(value) {
+			return this.capitalizeFirstLetter(value);
+		});
+	},
+
 	chunk: function(text, length) {
 
 		if(length <= 0 || text.length <= length)  {
@@ -105,6 +139,21 @@ var StringUtil = {
 		}
 
 	    return output;
+	},
+
+	formatNumber: function(num, n, x, s, c) {
+		if(typeof num !== "number") {
+			num = Number(num);
+		}
+
+	    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
+		    num = num.toFixed(Math.max(0, ~~n));
+
+		return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
+	},
+
+	isLetter: function(char) {
+		return char.toLowerCaste() !== char.toUpperCase();
 	},
 
 	isNull: function(text) {
@@ -189,7 +238,6 @@ var StringUtil = {
 	},
 
 	replaceAll: function(text, find, replacement, ignoreCase) {
-
 		var params = ignoreCase ? 'gi' : 'g';
 
 		return text.replace(new RegExp(find, params), replacement);
@@ -236,6 +284,12 @@ var StringUtil = {
 		    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
 		    return this.replace(rtrim, '');
 		}
+	},
+
+	trim2: function(text, chars) {
+		// todo: escape regex chars
+		var r = new RegExp('^[' + chars + ']+|[' + chars + ']+$', 'g');
+		    return text.replace(r, '');
 	},
 
 	trimAll: function() {

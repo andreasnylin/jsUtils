@@ -29,6 +29,18 @@ test('MathUtil.clamp(50, 0, 25) === 25', MathUtil.clamp(50, 0, 25) === 25);
 
 test('MathUtil.clamp(-10, 0, 25) === 0', MathUtil.clamp(-10, 0, 25) === 0);
 
+test('MathUtil.closest([100, 55, 13.4, -55, 10001, 999, 77.56], 66) === 55', MathUtil.closest([100, 55, 13.4, -55, 10001, 999, 77.56], 66) === 55);
+
+test('MathUtil.closest([100, 55, 13.4, -55, 10001, 999, 77.56], -40) === -55', MathUtil.closest([100, 55, 13.4, -55, 10001, 999, 77.56], -40) === -55);
+
+test('MathUtil.closestLarger([100, 55, 13.4, -55, 10001, 999, 77.56], -40) === 13.4', MathUtil.closestLarger([100, 55, 13.4, -55, 10001, 999, 77.56], -40) === 13.4);
+
+test('MathUtil.closestLarger([100, 55, 13.4, -55, 10001, 999, 77.56], 999.99) === 10001', MathUtil.closestLarger([100, 55, 13.4, -55, 10001, 999, 77.56], 999.99) === 10001);
+
+test('MathUtil.closestSmaller([100, 55, 13.4, -55, 10001, 999, 77.56], -40) === -55', MathUtil.closestSmaller([100, 55, 13.4, -55, 10001, 999, 77.56], -40) === -55);
+
+test('MathUtil.closestSmaller([100, 55, 13.4, -55, 10001, 999, 77.56], 999.99) === 999', MathUtil.closestSmaller([100, 55, 13.4, -55, 10001, 999, 77.56], 999.99) === 999);
+
 test('MathUtil.inRange(5, -1, 8) === true', MathUtil.inRange(5, -1, 8));
 
 test('MathUtil.inRange(10, -1, 8) === false', MathUtil.inRange(10, -1, 8) === false);

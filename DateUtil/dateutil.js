@@ -11,10 +11,6 @@ var DateUtil = {
         startDate = ignoreTimeZone ? this.toUTCDate(startDate) : startDate;
         endDate = ignoreTimeZone ? this.toUTCDate(endDate) : endDate;
 
-        console.log('ignoreTimeZone', ignoreTimeZone)
-        console.log(startDate)
-        console.log(endDate)
-
         var timeDiff = endDate.getTime() - startDate.getTime();
 
         diff.days = Math.floor(timeDiff / 1000 / 60 / 60 / 24);
@@ -29,6 +25,10 @@ var DateUtil = {
         diff.seconds = Math.floor(timeDiff / 1000);
 
         return diff;
+    },
+
+    isLeapYear: function(year) {
+        return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
     },
 
     prettyTimeDiff: function(earlierDate, laterDate) {
@@ -78,24 +78,17 @@ var DateUtil = {
         }
     },
 
-    getDayName: function() {
+    getDayName: function(date, dayNameList) {
+      dayNameList = dayNameList || [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ];
 
+      return dayNameList[date.getDay() - 1];
     },
 
-    getDayNumber: function() {
+    getMonthName: function(date, monthNameList) {
+      monthNameList = monthNameList || [ 'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December' ];
 
-    },
-
-    getMonthName: function() {
-
-    },
-
-    getMonthNumber: function() {
-
-    },
-
-    isLeapYear: function() {
-
+      return monthNameList[date.getMonth()];
     },
 
     toUTCDate: function(date) {

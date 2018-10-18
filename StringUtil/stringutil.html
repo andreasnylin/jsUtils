@@ -71,6 +71,10 @@ test('truncateMid', StringUtil.truncateMid('abcdefghijklmnop', 5) === 'abcop');
 test('chunk 123456789 ', StringUtil.chunk('123456789', 3).length === 3);
 test('chunk 1 is 456 ', StringUtil.chunk('123456789', 3)[1] === '456');
 
+test('StringUtil.camelCase(\'Hej på dig\') === \'hejPåDig\'', StringUtil.camelCase('Hej på dig') === 'hejPåDig');
+
+test('StringUtil.pascalCase(\'Hej på dig\') === \'HejPåDig\'', StringUtil.pascalCase('Hej på dig') === 'HejPåDig');
+
 </script>
     </body>
 </html>

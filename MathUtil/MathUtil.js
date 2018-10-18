@@ -16,6 +16,44 @@ var MathUtil = {
 		return Math.min(Math.max(value, Math.min(min, max)), Math.max(min, max));
 	},
 
+	closest: function(arr, value) {
+		return arr.reduce(function (prev, current) {
+		  return (Math.abs(current - value) < Math.abs(prev - value) ? current : prev);
+		});
+	},
+
+	closestLarger: function(arr, value) {
+		var tmp = arr.slice(0);
+
+		tmp.sort(function(a, b) { return a - b; });
+
+		for (var i = 0; i < tmp.length; i++) {
+			var currentValue = tmp[i];
+
+			if(currentValue > value) {
+				return currentValue;
+			}
+		}
+
+		return null;
+	},
+
+	closestSmaller: function(arr, value) {
+		var tmp = arr.slice(0);
+
+		tmp.sort(function(a, b) { return a - b; });
+
+		for (var i = tmp.length - 1; i >= 0; i--) {
+			var currentValue = tmp[i];
+
+			if(currentValue < value) {
+				return currentValue;
+			}
+		}
+
+		return null;
+	},
+
 	distance: function(p0, p1) {
 		var dx = p1.x - p0.x,
 			dy = p1.y - p0.y;
@@ -56,17 +94,23 @@ var MathUtil = {
 		return value >= Math.min(min, max) && value <= Math.max(min, max);
 	},
 
+	invert: function(min, max, value) {
+		return max - min - value;
+	},
+
 	mid: function() {
 		return this.sum.apply(this, arguments) / arguments.length;
 	},
 
 	mean: function() {
 		var mid = Math.floor((arguments.length - 1) / 2);
-		console.log(mid);
 		return arguments[mid];
 	},
 
 	neg: function(value) {
+		if(value < 0) {
+			return value;
+		}
 		return 0 - value;
 	},
 
@@ -95,6 +139,17 @@ var MathUtil = {
 		return values;
 	},
 
+	range2: function(min, max, count) {
+		var values = [],
+			step = (max - min) / (count - 1);
+
+		for(var i = 0; i < count; i++) {
+			values.push(Math.round(min + step * i));
+		}
+
+		return values;
+	},
+
 	random: function(min, max) {
 	  return min + Math.random() * (max - min); 
 	},
@@ -103,7 +158,7 @@ var MathUtil = {
 	  return Math.floor(min + Math.random() * (max - min + 1));
 	},
 
-	randomRange: function(count, min, max) {
+	randomNumbers: function(count, min, max) {
 	  var range = [];
 	  for(var i  = count; i > 0; i--) {
 	    range.push(random(min, max));
@@ -111,12 +166,29 @@ var MathUtil = {
 	  return range;
 	},
 
-	randomIntRange: function(count, min, max) {
+	randomIntNumbers: function(count, min, max) {
 	  var range = [];
 	  for(var i  = count; i > 0; i--) {
 	    range.push(randomInt(min, max));
 	    }
 	  return range;
+	},
+
+	randomMultiRange: function() {
+		const ranges = arguments.length / 2
+			rangeIndex = random(0, ranges) * 2;
+
+		return random(arguments[rangeIndex], arguments[rangeIndex + 1]);
+	},
+
+	randomDist: function(min, max, iterations) {
+		let total = 0;
+		
+		for (var i = iterations - 1; i >= 0; i--) {
+			total += random(min, max);
+		}
+
+		return Math.floor(total / iterations + 1);
 	},
 
 	randomMultiplier: function(min, max, multiplier){
@@ -140,6 +212,18 @@ var MathUtil = {
 		}
 
 		return s;
+	},
+
+	// Greatest Common Divisor
+	gcd: function(a, b) {
+	  if(a === 0 || b === 0) return a + b; 
+	  return this.gcd(b, a % b);
+	},
+
+	// Least Common Multiple
+	lcm: function(a, b) {
+		var gcd = this.gcf(a, b);
+		return (a * b) / gcf;
 	}
 
 };
